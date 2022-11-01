@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showView: Bool = false
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            Home()
+            if showView {
+                Home()
+            }
         }
+        
         .frame(maxWidth: .infinity)
         .background{
             ZStack{
@@ -35,6 +39,11 @@ struct ContentView: View {
             .ignoresSafeArea()
         }
         .preferredColorScheme(.dark)
+        .onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                showView = true
+            }
+        }
     }
 }
 
